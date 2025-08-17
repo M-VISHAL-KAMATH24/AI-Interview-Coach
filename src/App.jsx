@@ -84,7 +84,40 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-900 via-orange-950 to-red-900 flex flex-col items-center justify-center p-6 gap-10">
-      <h1 className="text-7xl text-white">AI Interview Coach Starter Code</h1>
+      <h1 className="text-6xl sm:text-8xlfont-bold bg-gradient-to-r from-emerald-400 via-sky-300 to blue-500 bg-clip-text text-transparent text-center">AI Interview Coach </h1>
+      <div className="w-full max-w-7xl flex flex-col items -center justify-center">
+        {!questionData?(
+          <div className="w-full max-w-md p-10 bg-gray-900/80 backdrop-blur-md border border-gray-700 rounded-3xl shadow-lg shadow-sky-600 hover:shadow-2xl hover:shadow-sky-400 transition duration-300 text-center">
+            <Code className="mx-auto mb-6 text-cyan-400 w-24 h-24"/>
+            <h2 className="text-3xl font-semibold text-white mb-4 ">Are You Ready ..!</h2>
+            <p className="text-slate-300 mb-8 text-lg leading-relaxed">Solve the Coding Interview Questions Get Hints and Imporve Your Skills..!</p>
+            <div className="mb-8">
+              <p className="text-sky-400 mb-4 font-semibold text-lg text-left">Seelect Difficulty Level</p>
+              <div className="flex justify-center gap-3 flex-wrap sm:flex-nonwrap">
+                {["Beginner","Medium","Intermediate"].map((level)=>(
+                  <button key={level} onClick={()=>handleDifficultySelect(level)}
+                  className={`px-6 py-3 rounded-full font-semibold transition-colors duration-200 cursor-pointer ${
+                    difficulty===level?
+                    "bg-blue-500 text-white shadow-mb":
+                    "bg-gray-700 text-gray-300 hover:bg-gray-600"
+                  }`}>
+                    {level}
+                  </button>
+                ))}
+              </div>
+            </div>
+            {warning &&(
+              <p className="text-red-500 font-semibold mb-4">{warning}</p>
+            )}
+            <button onClick={generateQuestion} disabled={!aiReady || loading} className="w-full px-10 py-4 bg-gradient-to-r from-sky-400 to-emerald-400 hover:from-sky-500 hover:to-emerald-500 text-white font-semibold text-lg rounded-3xl shadow-lg transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer">{loading?"Generating...":"Generate question"}</button>
+          </div>
+        ):(
+          <div className="space-y-6 w-full">
+            <div className="grid lg:grid-cols-2 gap-6"></div>
+          </div>
+        )}
+      </div>
+
     </div>
   );
 }
